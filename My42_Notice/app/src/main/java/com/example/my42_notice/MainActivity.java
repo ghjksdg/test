@@ -89,16 +89,15 @@ public class MainActivity extends AppCompatActivity {
             if(manager.getNotificationChannel(CHANNEL_ID3)==null){
                 manager.createNotificationChannel(new NotificationChannel(CHANNEL_ID3, CHANNEL_NAME3, NotificationManager.IMPORTANCE_DEFAULT));
             }
-            builder = new NotificationCompat.Builder(this, CHANNEL_ID3);
-        }else{
-            builder = new NotificationCompat.Builder(this);
         }
 
-        Intent intent = new Intent(this, SubActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1001, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle();
+        style.bigText("많은 글자들입니다.\n닷테!\n마츠다 컨트롤러!!!!!!\n인걸!\n↑↑↓↓→←→←!!");
+        style.setBigContentTitle("위대한 마츠다 컨트롤러의 힘이다!");
+        style.setSummaryText("마! 츠! 다!");
 
-        builder.setContentTitle("간단 알림 클릭").setContentText("클릭 알림 메세지입니다.").setSmallIcon(android.R.drawable.ic_menu_view)
-        .setAutoCancel(true).setContentIntent(pendingIntent);
+        builder = new NotificationCompat.Builder(this, CHANNEL_ID3).setSmallIcon(android.R.drawable.ic_menu_send)
+                    .setStyle(style);
 
         Notification noti = builder.build();
         manager.notify(3, noti);
